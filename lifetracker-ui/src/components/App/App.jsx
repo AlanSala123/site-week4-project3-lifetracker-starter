@@ -1,11 +1,15 @@
 import './App.css'
-import axios from 'axios'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Login from '../login/login'
 import Navbar from '../Navbar/Navbar'
 import Register from '../Register/Register'
+import Home from '../Home/Home'
+import ActivityPage from '../ActivityPage/ActivityPage'
+import { useState } from 'react'
+
 
 function App() {
+  const [welcome, setWelcome] = useState('');
 
   return (
     <div>
@@ -14,7 +18,7 @@ function App() {
           <Route path="/login" element={
           <main>
             <Navbar />
-            <Login />
+            <Login welcome={welcome} setWelcome={setWelcome}/>
           </main>
           } />
           <Route path="/Register" element={
@@ -22,6 +26,18 @@ function App() {
             <Navbar />
             <Register />
           </main>
+          } />
+          <Route path="/" element={
+           <main>
+            <Navbar />
+            <Home />
+           </main> 
+          } />
+          <Route path="/Activity" element={
+            <main>
+              <Navbar />
+              <ActivityPage welcome={welcome}/>
+            </main>
           } />
         </Routes>
       </BrowserRouter>
