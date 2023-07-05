@@ -4,6 +4,7 @@
 
 const express = require("express")
 const User = require("../models/user")
+const { authenticateJWT } = require('../utils/authenticate')
 const router = express.Router()
 
 //login endpoint
@@ -14,11 +15,15 @@ router.post("/login", async function (req, res, next) {
         res.send(user.error);
         return res.status(400).send(user)
     }
-    return res.status(200).json({ user })
+    //we are generating the user token once they login
+    const token = User.generateAuthToken(user)
+    return res.status(200).json({ user, token })
+    
   } catch (err) {
     next(err)
   }
 })
+
 //register endpoint
 router.post("/register", async function (req, res, next) {
   try {

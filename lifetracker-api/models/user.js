@@ -51,7 +51,6 @@ class User {
     static async register(creds) {
         const { email, password, firstName, lastName, userName} = creds
         const existingUserWithEmail = await User.fetchUserByEmail(email)
-        const userName2 = firstName + lastName // JUST FOR TESTING
         if (existingUserWithEmail) {
           return { error: 'Duplicate email'}
         }
@@ -63,27 +62,36 @@ class User {
               first_name,
               last_name,
               email,
-              userName
+              username
             )
             VALUES ($1, $2, $3, $4, $5)
             RETURNING email,            
                       first_name AS "firstName", 
-                      last_name AS "lastName"
+                      last_name AS "lastName",
+                      username AS "userName"
                       `,
-          [hashedPassword, firstName, lastName, lowerEmail, userName2]
+          [hashedPassword, firstName, lastName, lowerEmail, userName]
         )
         const user = result.rows[0];
         return user
       }
+
+      static async getById(id) {
+        //get the user by id
+        const { rows } = await db.query('SELECT * FROM users WHERE id = $1', [id])
+        return rows[0];
+      }
+
+      //generate authorization token
       static generateAuthToken(user) {
         const payload = {
             id: user.id,
-            firstname: user.firstname,
-            lastname: user.lastname,
-            emailaddress: user.emailaddress
+            firstname: user.firstName,
+            lastname: user.lastName,
+            emailaddress: user.email,
+            username: user.userName
         }
         const token = jwt.sign(payload, secretKey, { expiresIn: '1h' })
-
         return token
     }
     static verifyAuthToken(token) {
