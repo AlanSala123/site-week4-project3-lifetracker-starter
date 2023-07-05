@@ -13,7 +13,7 @@ function Home() {
             <div className="belowText">
                 <p>Fitness</p>
                 <p>Sleep</p>
-                <p>Cook</p>
+                <p>Nutrition</p>
             </div>
             <div className="belowPics">
                 <img src="https://media.istockphoto.com/id/1366052585/photo/shot-of-a-group-of-friends-hanging-out-before-working-out-together.jpg?s=612x612&w=0&k=20&c=rj7LgjUuXde0eLWikS1rvDnsKDdBotgsy9eM5HDzko0=" width="400" height="300" />

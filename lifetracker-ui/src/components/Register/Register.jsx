@@ -12,6 +12,7 @@ function Register() {
         lastName: "",
         email: "",
         password: "",
+        userName: ""
     })
 
     const handleOnInputChange = (event) => {
@@ -36,6 +37,7 @@ function Register() {
                 lastName: form.lastName,
                 email: form.email,
                 password: form.password,
+                userName: form.userName
             })
 
             if (res?.data?.user) {
@@ -61,6 +63,9 @@ function Register() {
                         onChange={handleOnInputChange} /><br /><br />
                     <label for="lastName">Last Name</label><br />
                     <input type="text" placeholder="Add your last name here!" id="last_input" name="lastName" value={form.lastName}
+                        onChange={handleOnInputChange} /><br /><br />
+                    <label for="userName">Username</label><br />
+                    <input type="text" placeholder="Add your username here!" id="user_input" name="userName" value={form.userName}
                         onChange={handleOnInputChange} /><br /><br />
                     <label for="email">Email</label><br />
                     <input type="email" placeholder="Add your email here!" id="email" name="email" value={form.email}

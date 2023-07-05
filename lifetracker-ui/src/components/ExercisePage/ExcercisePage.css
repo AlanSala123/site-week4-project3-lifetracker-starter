@@ -1,0 +1,23 @@
+.Excercise {
+    font-size: 24px;
+    text-align: center;
+}
+
+.banner {
+    text-align: center;
+    background-color: teal;
+    height: 150px;
+    color: white;
+    padding-top: 20px;
+    font-size: 30px;
+}
+
+.ExcerciseForm {
+    text-align: center;
+    margin-top: 100px;
+    border-width:3px;
+    border-style:solid;
+    border-color:#287EC7;
+    margin-right: 30%;
+    margin-left: 30%;
+}
