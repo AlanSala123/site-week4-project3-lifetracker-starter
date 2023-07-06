@@ -18,7 +18,7 @@ router.post("/login", async function (req, res, next) {
     //we are generating the user token once they login
     const token = User.generateAuthToken(user)
     return res.status(200).json({ user, token })
-    
+
   } catch (err) {
     next(err)
   }
@@ -37,5 +37,10 @@ router.post("/register", async function (req, res, next) {
     next(err)
   }
 })
+
+router.post("/Excercise", async function (req, res, next) {
+
+})
+
 
 module.exports = router
