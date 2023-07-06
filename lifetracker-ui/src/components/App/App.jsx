@@ -8,6 +8,8 @@ import ActivityPage from '../ActivityPage/ActivityPage'
 import { useState, useEffect } from 'react'
 import jwtDecode from 'jwt-decode'
 import ExcercisePage from '../ExercisePage/ExcercisePage'
+import NutritionPage from '../NutritionPage/NutritionPage'
+import SleepPage from '../SleepPage/SleepPage'
 
 
 function App() {
@@ -18,17 +20,16 @@ function App() {
   const [userName, setUserName] = useState();
 
   useEffect(() => {
-    const checkLoggedIn = () =>{
+    const checkLoggedIn = () => {
       //check if the user is logged in when they first access the webpage
       const token = localStorage.getItem("token");
       if (token) {
 
         const decodedToken = jwtDecode(token);
-        console.log(decodedToken)
         setUserName(decodedToken.emailaddress);
 
         //check to see if the token has expired
-        if (decodedToken.exp * 1000 > Date.now()){
+        if (decodedToken.exp * 1000 > Date.now()) {
           setIsLoggedIn(true);
         } else {
           localStorage.removeItem("token");
@@ -37,7 +38,7 @@ function App() {
       }
     };
     checkLoggedIn();
-  },[])
+  }, [])
 
   const handleLogout = () => {
     localStorage.removeItem("token")
@@ -47,31 +48,41 @@ function App() {
   return (
     <div>
       <BrowserRouter>
-      <Navbar isLoggedIn={isLoggedIn} handleLogout={handleLogout}/>
+        <Navbar isLoggedIn={isLoggedIn} handleLogout={handleLogout} />
         <Routes>
           <Route path="/login" element={
-          <main>
-            <Login setIsLoggedIn={setIsLoggedIn} setUserName={setUserName}/>
-          </main>
+            <main>
+              <Login setIsLoggedIn={setIsLoggedIn} setUserName={setUserName} />
+            </main>
           } />
           <Route path="/Register" element={
-          <main>          
-            <Register />
-          </main>
+            <main>
+              <Register />
+            </main>
           } />
           <Route path="/" element={
-           <main>
-            <Home />
-           </main> 
+            <main>
+              <Home />
+            </main>
           } />
           <Route path="/Activity" element={
             <main>
-              <ActivityPage isLoggedIn={isLoggedIn} userName={userName}/>
+              <ActivityPage isLoggedIn={isLoggedIn} userName={userName} />
             </main>
           } />
           <Route path="/Excercise" element={
             <main>
-              <ExcercisePage isLoggedIn={isLoggedIn}/>
+              <ExcercisePage isLoggedIn={isLoggedIn} />
+            </main>
+          } />
+          <Route path="/Nutrition" element={
+            <main>
+              <NutritionPage isLoggedIn={isLoggedIn}/>
+            </main>
+          } />
+          <Route path="/Sleep" element={
+            <main>
+               <SleepPage isLoggedIn={isLoggedIn}/>
             </main>
           } />
         </Routes>

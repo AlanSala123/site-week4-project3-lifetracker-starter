@@ -1,19 +1,14 @@
-.NutritionPage {
-  background: #f7fafc;
+.Nutrition {
+  font-size: 24px;
+  text-align: center;
 }
-.NutritionPage .nutrition-feed {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  width: 100%;
-  max-width: 600px;
-}
-.white {
+
+.NutritionBanner {
+  text-align: center;
+  background-color: lightblue;
+  height: 150px;
   color: white;
+  padding-top: 20px;
+  font-size: 30px;
 }
-.NutritionPage .button {
-  display: flex;
-}
-.NutritionPage .button button {
-  flex: 1;
-}
+

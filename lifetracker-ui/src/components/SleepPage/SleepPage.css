@@ -1,6 +1,13 @@
-.SleepPage .button {
-  display: flex;
+.Sleep {
+  font-size: 24px;
+  text-align: center;
 }
-.SleepPage .button button {
-  flex: 1;
+
+.sleepBanner {
+  text-align: center;
+  background-color: lightpink;
+  height: 150px;
+  color: white;
+  padding-top: 20px;
+  font-size: 30px;
 }

@@ -33,7 +33,6 @@ function Login({ setIsLoggedIn, setUserName }) {
         setErrors(null)
         try {
             const res = await axios.post(`http://localhost:3001/auth/login`, form)
-            console.log(res)
             if (!(res?.data === "Invalid username/password")) {
                 
                 const {token} = res.data;
