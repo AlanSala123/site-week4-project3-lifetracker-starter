@@ -72,12 +72,12 @@ function App() {
           } />
           <Route path="/Excercise" element={
             <main>
-              <ExcercisePage isLoggedIn={isLoggedIn} form={form} setForm={setForm} />
+              <ExcercisePage isLoggedIn={isLoggedIn} form={form} />
             </main>
           } />
           <Route path="/Nutrition" element={
             <main>
-              <NutritionPage isLoggedIn={isLoggedIn} />
+              <NutritionPage isLoggedIn={isLoggedIn} form={form} />
             </main>
           } />
           <Route path="/Sleep" element={

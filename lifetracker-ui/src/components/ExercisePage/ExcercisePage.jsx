@@ -1,5 +1,5 @@
 import "./ExcercisePage.css"
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import axios from 'axios'
 
 function ExcercisePage({ isLoggedIn, form }) {
@@ -13,13 +13,29 @@ function ExcercisePage({ isLoggedIn, form }) {
 
     //useState for the results sent from the backend
     const [results, setResult] = useState([])
+    
+    //handleGet function
+    async function fetchData() {
+        try {
+            const result = await axios.post(`http://localhost:3001/auth/getExcercise`, {...form})
+            setResult(result?.data?.workout);
+        } catch (error) {
+            throw error;
+        }
+    }
+    useEffect(() => {
+        async function handleGet() {
+            await fetchData()
+        }
+        handleGet();
+    },[form])
 
     //function that is run whenever someone presses to submit their excercise
     const handleOnSubmit = async (e) => {
         e.preventDefault()
         try {
             const result = await axios.post(`http://localhost:3001/auth/Excercise`, { ...workForm, ...form })
-            setResult(result)
+            setResult(result?.data?.workout?.reverse())
         } catch (error) {
             throw error
         }
@@ -40,6 +56,7 @@ function ExcercisePage({ isLoggedIn, form }) {
                         <div className="banner">
                             <h1> Excercise </h1>
                         </div>
+                        <h1>Enter an Excercise</h1>
                         <div>
                             <form className="ExcerciseForm">
                                 <label for="Name">Excercise Name</label><br />
@@ -61,7 +78,7 @@ function ExcercisePage({ isLoggedIn, form }) {
                             </form>
                             <h1> Previously Tracked Activities </h1>
                             {
-                                results?.data?.workout?.reverse().map((item) => {
+                                results?.map((item) => {
                                     const worktime = new Date(item.worktime)
                                     const formattedDateTime = `${worktime.toLocaleDateString()} ${worktime.toLocaleTimeString()}`
 
