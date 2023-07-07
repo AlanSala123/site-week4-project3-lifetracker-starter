@@ -61,12 +61,12 @@
     font-weight: bold;
   }
   
-  .workoutCards p {
+  .workoutCards > p {
     margin: 10px 0;
   }
-  
-  .workoutCards p:first-child {
-    font-weight: bold;
+
+  .Date {
     font-size: 18px;
   }
+  
   

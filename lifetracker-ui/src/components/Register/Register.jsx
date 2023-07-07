@@ -5,7 +5,6 @@ import axios from 'axios'
 
 function Register() {
     const navigate = useNavigate()
-    const [isLoading, setIsLoading] = useState(false)
     const [error, setError] = useState('')
     const [form, setForm] = useState({
         firstName: "",
@@ -27,10 +26,8 @@ function Register() {
     }
 
     const handleOnSubmit = async (event) => {
-        event.preventDefault();
-        setIsLoading(true)
+        event.preventDefault()
         setError(null)
-
         try {
             const res = await axios.post("http://localhost:3001/auth/register", {
                 firstName: form.firstName,
@@ -39,18 +36,14 @@ function Register() {
                 password: form.password,
                 userName: form.userName
             })
-
             if (res?.data?.user) {
-                setIsLoading(false)
                 navigate("/login")
             } else {
                 setError("That email is already in use")
-                setIsLoading(false)
             }
         } catch (err) {
             const message = err?.response?.data?.error?.message
             setError({ message })
-            setIsLoading(false)
         }
     }
     return (
@@ -73,7 +66,7 @@ function Register() {
                     <label for="password">Password</label><br />
                     <input type="password" placeholder="Add your secret password here" id="password" name="password" value={form.password}
                         onChange={handleOnInputChange} /><br /><br />
-                    <button className="SignButton"onClick={handleOnSubmit}> Sign up </button>
+                    <button className="SignButton" onClick={handleOnSubmit}> Sign up </button>
                 </form>
                 {
                     error?.length > 0 ? <h2 style={{ color: 'red' }}>{error}</h2> : null

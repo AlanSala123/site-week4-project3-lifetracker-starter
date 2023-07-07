@@ -7,9 +7,9 @@ import jwtDecode from "jwt-decode"
 function Login({ setIsLoggedIn, setUserName, form, setForm }) {
     //setting the useState
     const navigate = useNavigate()
-    const [isLoading, setIsLoading] = useState(false)
     const [errors, setErrors] = useState('')
 
+    //handle the form input change
     const handleOnInputChange = (event) => {
         if (event.target.name === "email") {
             if (event.target.value.indexOf("@") === -1) {
@@ -18,39 +18,28 @@ function Login({ setIsLoggedIn, setUserName, form, setForm }) {
                 setErrors(null)
             }
         }
-
         setForm((f) => ({ ...f, [event.target.name]: event.target.value }))
     }
 
     //function that is run whenever someone presses the submit button
     const handleOnSubmit = async (e) => {
         e.preventDefault()
-        setIsLoading(true)
         setErrors(null)
         try {
             const res = await axios.post(`http://localhost:3001/auth/login`, form)
             if (!(res?.data === "Invalid username/password")) {
-                
-                const {token} = res.data;
-                localStorage.setItem("token", token);
-                //Successful Login
-                setIsLoading(false)
-                setIsLoggedIn(true);
-
-                const decodedToken = jwtDecode(token);
-                //returning undefined at the moment
-                setUserName(decodedToken.emailaddress);
-
+                const { token } = res.data
+                localStorage.setItem("token", token)
+                setIsLoggedIn(true)
+                const decodedToken = jwtDecode(token)
+                setUserName(decodedToken.emailaddress)
                 navigate("/Activity")
-
             } else {
                 setErrors("Invalid username/password combination")
-                setIsLoading(false)
             }
         } catch (err) {
             const message = err?.response?.data?.error?.message
             setErrors({ message })
-            setIsLoading(false)
         }
     }
     return (
@@ -74,4 +63,4 @@ function Login({ setIsLoggedIn, setUserName, form, setForm }) {
     )
 }
 
-export default Login;
+export default Login

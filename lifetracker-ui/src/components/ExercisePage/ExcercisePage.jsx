@@ -2,7 +2,7 @@ import "./ExcercisePage.css"
 import { useState } from 'react'
 import axios from 'axios'
 
-function ExcercisePage({ isLoggedIn, form, setForm }) {
+function ExcercisePage({ isLoggedIn, form }) {
     //useState for the workout form
     const [workForm, setWorkForm] = useState({
         name: "",
@@ -16,17 +16,14 @@ function ExcercisePage({ isLoggedIn, form, setForm }) {
 
     //function that is run whenever someone presses to submit their excercise
     const handleOnSubmit = async (e) => {
-        e.preventDefault();
-        console.log(workForm); //MAKE SURE TO GET RID OF THIS
+        e.preventDefault()
         try {
-
             const result = await axios.post(`http://localhost:3001/auth/Excercise`, { ...workForm, ...form })
             setResult(result)
-
         } catch (error) {
             throw error
         }
-        setWorkForm({ name: "", category: "", duration: "", intensity: "" });
+        setWorkForm({ name: "", category: "", duration: "", intensity: "" })
     }
 
     //handle the input change from the event
@@ -65,12 +62,12 @@ function ExcercisePage({ isLoggedIn, form, setForm }) {
                             <h1> Previously Tracked Activities </h1>
                             {
                                 results?.data?.workout?.reverse().map((item) => {
-                                    const worktime = new Date(item.worktime);
-                                    const formattedDateTime = `${worktime.toLocaleDateString()} ${worktime.toLocaleTimeString()}`;
+                                    const worktime = new Date(item.worktime)
+                                    const formattedDateTime = `${worktime.toLocaleDateString()} ${worktime.toLocaleTimeString()}`
 
                                     return (
                                         <div className="workoutCards" key={item.workoutid}>
-                                            <p>Date Added: {formattedDateTime}</p>
+                                            <p className="Date">Date Added: {formattedDateTime}</p>
                                             <p>Workout ID =#{item.workoutid}</p>
                                             <p>{item.name}</p>
                                             <p>Intensity: {item.intensity}/10</p>

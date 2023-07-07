@@ -13,42 +13,36 @@ import SleepPage from '../SleepPage/SleepPage'
 
 
 function App() {
-  //useState for login, should initially be set to false
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  //useState for the user name of the person who signed into thier account
-  const [userName, setUserName] = useState();
-
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [userName, setUserName] = useState()
   const [form, setForm] = useState({
     email: "",
     password: "",
-})
+  })
 
   useEffect(() => {
     const checkLoggedIn = () => {
       //check if the user is logged in when they first access the webpage
-      const token = localStorage.getItem("token");
+      const token = localStorage.getItem("token")
       if (token) {
-    
-        const decodedToken = jwtDecode(token);
-        setUserName(decodedToken.emailaddress);
-        setForm({email: decodedToken.emailaddress})
-
+        const decodedToken = jwtDecode(token)
+        setUserName(decodedToken.emailaddress)
+        setForm({ email: decodedToken.emailaddress })
         //check to see if the token has expired
         if (decodedToken.exp * 1000 > Date.now()) {
-          setIsLoggedIn(true);
+          setIsLoggedIn(true)
         } else {
-          localStorage.removeItem("token");
-          setIsLoggedIn(false);
+          handleLogout()
         }
       }
-    };
-    checkLoggedIn();
+    }
+    checkLoggedIn()
   }, [])
 
+  //Function to handle the logout
   const handleLogout = () => {
     localStorage.removeItem("token")
-    setIsLoggedIn(false);
+    setIsLoggedIn(false)
   }
 
   return (
@@ -83,12 +77,12 @@ function App() {
           } />
           <Route path="/Nutrition" element={
             <main>
-              <NutritionPage isLoggedIn={isLoggedIn}/>
+              <NutritionPage isLoggedIn={isLoggedIn} />
             </main>
           } />
           <Route path="/Sleep" element={
             <main>
-               <SleepPage isLoggedIn={isLoggedIn}/>
+              <SleepPage isLoggedIn={isLoggedIn} />
             </main>
           } />
         </Routes>
