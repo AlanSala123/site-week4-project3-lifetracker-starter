@@ -61,7 +61,7 @@ router.post("/Nutrition", async function (req, res, next) {
   try {
     const food = await User.addNutrition(req.body)
     return res.status(200).json({ food })
-  } catch(error) {
+  } catch (error) {
     next(error)
   }
 })
@@ -71,7 +71,7 @@ router.post("/getNutrition", async function (req, res, next) {
   try {
     const food = await User.getAllNutrition(req.body)
     return res.status(200).json({ food })
-  } catch(error) {
+  } catch (error) {
     next(error)
   }
 })

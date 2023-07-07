@@ -113,7 +113,7 @@ class User {
   static async getAllNutrition(info) {
     const { email } = info;
     const user = await User.fetchUserByEmail(email);
-    const{ userid } = user
+    const { userid } = user
 
     //querying through the workout table WHERE userID matches userID from table
     const result = await db.query(
@@ -122,14 +122,14 @@ class User {
     return result.rows
   }
 
-    //Function to get all the nutritions for a specific user
-    static async fetchAllNutritions(userid) {
-      //querying through the workout table WHERE userID matches userID from table
-      const result = await db.query(
-        `SELECT * FROM nutritions WHERE userid=$1`, [userid]
-      )
-      return result.rows
-    }
+  //Function to get all the nutritions for a specific user
+  static async fetchAllNutritions(userid) {
+    //querying through the workout table WHERE userID matches userID from table
+    const result = await db.query(
+      `SELECT * FROM nutritions WHERE userid=$1`, [userid]
+    )
+    return result.rows
+  }
 
   //Function to add a workout to the workout database
   static async addWorkout(info) {
@@ -158,7 +158,7 @@ class User {
     const all = await User.fetchAllWorkouts(userid)
     return all
   }
-  
+
   static async getAllWorkouts(info) {
     //get all workouts
     const { email } = info;
