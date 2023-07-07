@@ -17,3 +17,15 @@ CREATE TABLE workouts (
     userID INT NOT NULL,
     FOREIGN KEY (userID) REFERENCES users(userID)
 );
+
+CREATE TABLE nutritions (
+    name Varchar(100) NOT NULL,
+    category Varchar(100) NOT NULL,
+    nutritionID SERIAL PRIMARY KEY,
+    quantity Varchar(100) NOT NULL,
+    calories Varchar(100) NOT NULL,
+    url Varchar(100) NOT NULL,
+    nutritionTime TIMESTAMP NOT NULL DEFAULT NOW(),
+    userID INT NOT NULL,
+    FOREIGN KEY (userID) REFERENCES users(userID)
+);

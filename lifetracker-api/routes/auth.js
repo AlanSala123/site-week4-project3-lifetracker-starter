@@ -46,4 +46,34 @@ router.post("/Excercise", async function (req, res, next) {
   }
 })
 
+//Get Excercises Endpoint
+router.post("/getExcercise", async function (req, res, next) {
+  try {
+    const workout = await User.getAllWorkouts(req.body)
+    return res.status(200).json({ workout })
+  } catch (error) {
+    next(error)
+  }
+})
+
+//Nutrition endpoint
+router.post("/Nutrition", async function (req, res, next) {
+  try {
+    const food = await User.addNutrition(req.body)
+    return res.status(200).json({ food })
+  } catch(error) {
+    next(error)
+  }
+})
+
+//Get Nutrition endpoint
+router.post("/getNutrition", async function (req, res, next) {
+  try {
+    const food = await User.getAllNutrition(req.body)
+    return res.status(200).json({ food })
+  } catch(error) {
+    next(error)
+  }
+})
+
 module.exports = router

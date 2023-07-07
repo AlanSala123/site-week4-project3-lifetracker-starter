@@ -77,6 +77,60 @@ class User {
     return user
   }
 
+  //Function to add nutrition
+  static async addNutrition(info) {
+
+    const { name, category, quantity, calories, url, email } = info
+    const user = await User.fetchUserByEmail(email)
+    const { userid } = user
+
+    //we want to add to the nutrition database
+    const result = await db.query(
+      `INSERT INTO nutritions (
+              name,
+              category,
+              quantity,
+              calories,
+              url,
+              userID
+          )
+          VALUES($1, $2, $3, $4, $5, $6)
+          RETURNING name,            
+                    category, 
+                    quantity,
+                    calories,
+                    url,
+                    userID
+                    `,
+      [name, category, quantity, calories, url, userid]
+    )
+    //get all the nutrition for a specific user
+    const all = await User.fetchAllNutritions(userid)
+    return all
+  }
+
+  //Function that grabs all the nutrition
+  static async getAllNutrition(info) {
+    const { email } = info;
+    const user = await User.fetchUserByEmail(email);
+    const{ userid } = user
+
+    //querying through the workout table WHERE userID matches userID from table
+    const result = await db.query(
+      `SELECT * FROM nutritions WHERE userid=$1`, [userid]
+    )
+    return result.rows
+  }
+
+    //Function to get all the nutritions for a specific user
+    static async fetchAllNutritions(userid) {
+      //querying through the workout table WHERE userID matches userID from table
+      const result = await db.query(
+        `SELECT * FROM nutritions WHERE userid=$1`, [userid]
+      )
+      return result.rows
+    }
+
   //Function to add a workout to the workout database
   static async addWorkout(info) {
     const { name, category, duration, intensity, email } = info
@@ -103,6 +157,19 @@ class User {
     //get all the workouts for a specific user
     const all = await User.fetchAllWorkouts(userid)
     return all
+  }
+  
+  static async getAllWorkouts(info) {
+    //get all workouts
+    const { email } = info;
+    const user = await User.fetchUserByEmail(email);
+    const { userid } = user;
+
+    //querying through the workout table WHERE userID matches userID from table
+    const result = await db.query(
+      `SELECT * FROM workouts WHERE userid=$1`, [userid]
+    )
+    return result.rows
   }
 
   //Function to get all the workouts for a specific user
