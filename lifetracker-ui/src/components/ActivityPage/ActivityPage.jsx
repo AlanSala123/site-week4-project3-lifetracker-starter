@@ -8,21 +8,30 @@ function ActivityPage({ isLoggedIn, userName }) {
                 isLoggedIn ?
                     <>
                         <h1>Welcome User: {userName} </h1>
+                        <h1> Activity Feed </h1>
                         <div className="difPages">
                             <Link to={"/Excercise"} >
-                                <button> Log Excercise </button>
+                                <button className="button"> Log Excercise </button>
                             </Link>
                             <Link to={"/Sleep"} >
-                                <button> Log Sleep </button>
+                                <button className="button"> Log Sleep </button>
                             </Link>
                             <Link to={"/Nutrition"} >
-                                <button> Log Nutrition </button>
+                                <button className="button"> Log Nutrition </button>
                             </Link>
                         </div>
                         <div className="ActivityFeed">
                             <div className="excercise">
                                 <p> Excercise </p>
-                                <p> Minutes worked out: </p>
+                                <p> Total Excercise Minutes: </p>
+                            </div>
+                            <div className="nutrition">
+                                <p>Nutrition</p>
+                                <p>Average Daily Calories: 0</p>
+                            </div>
+                            <div className="Sleeps">
+                                <p>Sleep</p>
+                                <p>Average hours of Sleep: 0</p>
                             </div>
                         </div>
                     </>

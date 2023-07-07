@@ -19,14 +19,20 @@ function App() {
   //useState for the user name of the person who signed into thier account
   const [userName, setUserName] = useState();
 
+  const [form, setForm] = useState({
+    email: "",
+    password: "",
+})
+
   useEffect(() => {
     const checkLoggedIn = () => {
       //check if the user is logged in when they first access the webpage
       const token = localStorage.getItem("token");
       if (token) {
-
+    
         const decodedToken = jwtDecode(token);
         setUserName(decodedToken.emailaddress);
+        setForm({email: decodedToken.emailaddress})
 
         //check to see if the token has expired
         if (decodedToken.exp * 1000 > Date.now()) {
@@ -52,7 +58,7 @@ function App() {
         <Routes>
           <Route path="/login" element={
             <main>
-              <Login setIsLoggedIn={setIsLoggedIn} setUserName={setUserName} />
+              <Login setIsLoggedIn={setIsLoggedIn} setUserName={setUserName} form={form} setForm={setForm} />
             </main>
           } />
           <Route path="/Register" element={
@@ -72,7 +78,7 @@ function App() {
           } />
           <Route path="/Excercise" element={
             <main>
-              <ExcercisePage isLoggedIn={isLoggedIn} />
+              <ExcercisePage isLoggedIn={isLoggedIn} form={form} setForm={setForm} />
             </main>
           } />
           <Route path="/Nutrition" element={

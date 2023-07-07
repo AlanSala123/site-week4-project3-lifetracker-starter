@@ -10,10 +10,10 @@ function Navbar({ isLoggedIn, handleLogout }) {
                 <li><a href="/Nutrition">Nutrition</a></li>
                 <li><a href="/Sleep">Sleep</a></li>
                 {
-                    isLoggedIn ? <li><a href="/"><button onClick={handleLogout}> Sign Out </button></a></li> :
+                    isLoggedIn ? <li><a href="/"><button className="SignOut" onClick={handleLogout}> Sign Out </button></a></li> :
                         <>
-                            <li><a href="/login"><button>Login</button></a></li>
-                            <li><a href="/Register"><button>Register</button></a></li>
+                            <li><a href="/login"><button className="SignOut">Login</button></a></li>
+                            <li><a href="/Register"><button className="SignOut">Register</button></a></li>
                         </>
                 }
             </ul>

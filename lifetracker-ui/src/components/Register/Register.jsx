@@ -73,7 +73,7 @@ function Register() {
                     <label for="password">Password</label><br />
                     <input type="password" placeholder="Add your secret password here" id="password" name="password" value={form.password}
                         onChange={handleOnInputChange} /><br /><br />
-                    <button onClick={handleOnSubmit}> Sign up </button>
+                    <button className="SignButton"onClick={handleOnSubmit}> Sign up </button>
                 </form>
                 {
                     error?.length > 0 ? <h2 style={{ color: 'red' }}>{error}</h2> : null

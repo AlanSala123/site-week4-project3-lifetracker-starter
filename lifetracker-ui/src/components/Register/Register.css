@@ -13,6 +13,26 @@
     display: flex;
 }
 
+.SignButton {
+    padding: 10px 20px;
+    background-color: #287EC7;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .SignButton:hover {
+    background-color: #1A5C99;
+    cursor: pointer;
+  }
+  
+  .SignButton:active {
+    background-color: #144174;
+  }
+
 input {
     height: 50px;
     width: 200px;
