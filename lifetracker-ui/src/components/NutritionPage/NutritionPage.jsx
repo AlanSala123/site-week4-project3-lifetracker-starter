@@ -4,8 +4,8 @@ import axios from 'axios'
 
 function NutritionPage({ isLoggedIn, form }) {
 
-     //useState for the Nutrition form
-     const [nutritionForm, setNutritionForm] = useState({
+    //useState for the Nutrition form
+    const [nutritionForm, setNutritionForm] = useState({
         name: "",
         category: "",
         calories: "",
@@ -19,7 +19,7 @@ function NutritionPage({ isLoggedIn, form }) {
     //handleGet function
     async function fetchData() {
         try {
-            const result = await axios.post(`http://localhost:3001/auth/getNutrition`, {...form})
+            const result = await axios.post(`http://localhost:3001/auth/getNutrition`, { ...form })
             setResult(result?.data?.food);
         } catch (error) {
             throw error;
@@ -30,10 +30,10 @@ function NutritionPage({ isLoggedIn, form }) {
             await fetchData()
         }
         handleGet();
-    },[form])
+    }, [form])
 
-     //function that is run whenever someone presses to submit their excercise
-     const handleOnSubmit = async (e) => {
+    //function that is run whenever someone presses to submit their excercise
+    const handleOnSubmit = async (e) => {
         e.preventDefault()
         try {
             const result = await axios.post(`http://localhost:3001/auth/Nutrition`, { ...nutritionForm, ...form })
@@ -41,7 +41,7 @@ function NutritionPage({ isLoggedIn, form }) {
         } catch (error) {
             throw error
         }
-        setNutritionForm({ name: "", category: "", calories: "", quantity: "", url: ""})
+        setNutritionForm({ name: "", category: "", calories: "", quantity: "", url: "" })
     }
 
     //handle the input change from the event
@@ -61,7 +61,7 @@ function NutritionPage({ isLoggedIn, form }) {
                             <h1>Enter Your Nutrition</h1>
                             <form className="NutritionForm">
                                 <label for="Name"> Name </label><br />
-                                <input type="text" placeholder="Add the name of your food!" id="name" name="name" value={nutritionForm.name} onChange={handleOnInputChange}/><br /><br />
+                                <input type="text" placeholder="Add the name of your food!" id="name" name="name" value={nutritionForm.name} onChange={handleOnInputChange} /><br /><br />
                                 <label for="cars">Choose a category:</label>
                                 <select id="workouts" name="category" value={nutritionForm.category} onChange={handleOnInputChange}>
                                     <option value="select">Select</option>
@@ -70,7 +70,7 @@ function NutritionPage({ isLoggedIn, form }) {
                                     <option value="lift">Food</option>
                                 </select><br /><br />
                                 <label for="Quantity"> Quantity </label><br />
-                                <input type="text" placeholder="Quantity of your food?" id="quant" name="quantity" value={nutritionForm.quantity} onChange={handleOnInputChange}/><br /><br />
+                                <input type="text" placeholder="Quantity of your food?" id="quant" name="quantity" value={nutritionForm.quantity} onChange={handleOnInputChange} /><br /><br />
                                 <label for="Calories"> Calories </label><br />
                                 <input type="text" placeholder="How many calories was your food?" id="cal" name="calories" value={nutritionForm.calories} onChange={handleOnInputChange} /><br /><br />
                                 <label for="url"> image url </label><br />
