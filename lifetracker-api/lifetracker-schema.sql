@@ -1,5 +1,5 @@
 CREATE TABLE users (
-    userID INT AUTO_INCREMENT PRIMARY KEY,
+    userID SERIAL PRIMARY KEY,
     username Varchar(100) NOT NULL,
     password Varchar(100) NOT NULL,
     first_name Varchar(100) NOT NULL,
@@ -10,6 +10,7 @@ CREATE TABLE users (
 CREATE TABLE workouts (
     name Varchar(100) NOT NULL,
     category Varchar(100) NOT NULL,
+    workoutID SERIAL PRIMARY KEY,
     duration Varchar(100) NOT NULL,
     intensity Varchar(100) NOT NULL,
     worktime TIMESTAMP NOT NULL DEFAULT NOW(),

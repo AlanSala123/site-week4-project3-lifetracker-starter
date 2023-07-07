@@ -38,8 +38,14 @@ router.post("/register", async function (req, res, next) {
   }
 })
 
+//excercise endpoint
 router.post("/Excercise", async function (req, res, next) {
-
+    try {
+      const workout = await User.addWorkout(req.body)
+      return res.status(200).json({ workout })
+    } catch (error) {
+      next(error)
+    }
 })
 
 

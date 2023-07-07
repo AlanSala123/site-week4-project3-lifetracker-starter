@@ -13,8 +13,9 @@ class User {
     
     //function to create a user in the database
     static _createPublicUser(user) {
+
         return {
-          id: user.id,
+          userID: user.userid,
           firstName: user.firstName,
           lastName: user.lastName,
           email: user.email,
@@ -31,6 +32,7 @@ class User {
           // compare hashed password to a new hash from password
           const isValid = await bcrypt.compare(password, user.password)
           if (isValid === true) {
+            console.log(user)
             return User._createPublicUser(user)
           }
         }
@@ -75,6 +77,52 @@ class User {
         const user = result.rows[0];
         return user
       }
+
+      //everytime a user inputs another workout
+      static async addWorkout(info) {
+
+        //destructure the info
+        const { name, category, duration, intensity, email, password } = info
+        console.log({info})
+
+        //grab the specific user in the database
+        const user = await User.fetchUserByEmail(email)
+        const { userid } = user
+
+        //we want to add to the workout database
+        const result = await db.query(
+          `INSERT INTO workouts (
+              name,
+              category,
+              duration,
+              intensity,
+              userID
+          )
+          VALUES($1, $2, $3, $4, $5)
+          RETURNING name,            
+                    category, 
+                    duration,
+                    intensity,
+                    userID
+                    `,
+          [name, category, duration, intensity, userid]
+        )
+        //get all the workouts from the user
+        const all = await User.fetchAllWorkouts(userid)
+        
+        return all;
+      }
+
+      static async fetchAllWorkouts(userid) {
+        
+        //querying through the workout table WHERE userID matches userID from table
+        const result = await db.query (
+          `SELECT * FROM workouts WHERE userid=$1`,[userid]
+        )
+        //return the array of the row results
+        return result.rows
+      }
+
 
       static async getById(id) {
         //get the user by id
