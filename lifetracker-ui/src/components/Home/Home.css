@@ -16,6 +16,7 @@
   font-size: 25px;
   font-family: Monaco;
 }
+
 .belowPics {
   display: flex;
   flex-direction: row;
@@ -26,6 +27,7 @@
   font-size: 45px;
   font-family: Monaco;
 }
+
 .belowText {
   display: flex;
   flex-direction: row;
@@ -36,6 +38,7 @@
   font-size: 45px;
   font-family: Monaco;
 }
+
 img {
   border-radius: 25%;
 }

@@ -16,7 +16,7 @@ function NutritionPage({ isLoggedIn, form }) {
     //useState for the results sent from the backend
     const [results, setResult] = useState([])
 
-    //handleGet function
+    //Get Data from the backend to display in the frontend
     async function fetchData() {
         try {
             const result = await axios.post(`https://lifetrack-backend.onrender.com/auth/getNutrition`, { ...form })
@@ -32,7 +32,7 @@ function NutritionPage({ isLoggedIn, form }) {
         handleGet();
     }, [form])
 
-    //function that is run whenever someone presses to submit their excercise
+    //function that is run whenever someone presses to submit 
     const handleOnSubmit = async (e) => {
         e.preventDefault()
         try {

@@ -5,7 +5,6 @@ import { useState } from 'react'
 import jwtDecode from "jwt-decode"
 
 function Login({ setIsLoggedIn, setUserName, form, setForm }) {
-    //setting the useState
     const navigate = useNavigate()
     const [errors, setErrors] = useState('')
 

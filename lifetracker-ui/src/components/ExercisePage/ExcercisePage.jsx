@@ -13,24 +13,24 @@ function ExcercisePage({ isLoggedIn, form }) {
 
     //useState for the results sent from the backend
     const [results, setResult] = useState([])
-    
-    //handleGet function
+
+    //fetchData function to show the data in the frontend
     async function fetchData() {
         try {
-            const result = await axios.post(`https://lifetrack-backend.onrender.com/auth/getExcercise`, {...form})
-            setResult(result?.data?.workout);
+            const result = await axios.post(`https://lifetrack-backend.onrender.com/auth/getExcercise`, { ...form })
+            setResult(result?.data?.workout)
         } catch (error) {
-            throw error;
+            throw error
         }
     }
     useEffect(() => {
         async function handleGet() {
             await fetchData()
         }
-        handleGet();
-    },[form])
+        handleGet()
+    }, [form])
 
-    //function that is run whenever someone presses to submit their excercise
+    //function that sends workout form data to the backend
     const handleOnSubmit = async (e) => {
         e.preventDefault()
         try {
@@ -81,7 +81,6 @@ function ExcercisePage({ isLoggedIn, form }) {
                                 results?.map((item) => {
                                     const worktime = new Date(item.worktime)
                                     const formattedDateTime = `${worktime.toLocaleDateString()} ${worktime.toLocaleTimeString()}`
-
                                     return (
                                         <div className="workoutCards" key={item.workoutid}>
                                             <p className="Date">Date Added: {formattedDateTime}</p>
