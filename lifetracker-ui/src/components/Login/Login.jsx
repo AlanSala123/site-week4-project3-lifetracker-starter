@@ -26,7 +26,7 @@ function Login({ setIsLoggedIn, setUserName, form, setForm }) {
         e.preventDefault()
         setErrors(null)
         try {
-            const res = await axios.post(`http://localhost:3001/auth/login`, form)
+            const res = await axios.post(`https://lifetrack-backend.onrender.com/auth/login`, form)
             if (!(res?.data === "Invalid username/password")) {
                 const { token } = res.data
                 localStorage.setItem("token", token)

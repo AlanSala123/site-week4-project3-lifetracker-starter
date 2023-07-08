@@ -19,7 +19,7 @@ function NutritionPage({ isLoggedIn, form }) {
     //handleGet function
     async function fetchData() {
         try {
-            const result = await axios.post(`http://localhost:3001/auth/getNutrition`, { ...form })
+            const result = await axios.post(`https://lifetrack-backend.onrender.com/auth/getNutrition`, { ...form })
             setResult(result?.data?.food);
         } catch (error) {
             throw error;
@@ -36,7 +36,7 @@ function NutritionPage({ isLoggedIn, form }) {
     const handleOnSubmit = async (e) => {
         e.preventDefault()
         try {
-            const result = await axios.post(`http://localhost:3001/auth/Nutrition`, { ...nutritionForm, ...form })
+            const result = await axios.post(`https://lifetrack-backend.onrender.com/auth/Nutrition`, { ...nutritionForm, ...form })
             setResult(result?.data?.food?.reverse())
         } catch (error) {
             throw error

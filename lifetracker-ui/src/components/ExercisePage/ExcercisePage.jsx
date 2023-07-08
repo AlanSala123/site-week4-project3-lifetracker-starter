@@ -17,7 +17,7 @@ function ExcercisePage({ isLoggedIn, form }) {
     //handleGet function
     async function fetchData() {
         try {
-            const result = await axios.post(`http://localhost:3001/auth/getExcercise`, {...form})
+            const result = await axios.post(`https://lifetrack-backend.onrender.com/auth/getExcercise`, {...form})
             setResult(result?.data?.workout);
         } catch (error) {
             throw error;
@@ -34,7 +34,7 @@ function ExcercisePage({ isLoggedIn, form }) {
     const handleOnSubmit = async (e) => {
         e.preventDefault()
         try {
-            const result = await axios.post(`http://localhost:3001/auth/Excercise`, { ...workForm, ...form })
+            const result = await axios.post(`https://lifetrack-backend.onrender.com/auth/Excercise`, { ...workForm, ...form })
             setResult(result?.data?.workout?.reverse())
         } catch (error) {
             throw error
