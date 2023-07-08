@@ -79,7 +79,6 @@ class User {
 
   //Function to add nutrition
   static async addNutrition(info) {
-
     const { name, category, quantity, calories, url, email } = info
     const user = await User.fetchUserByEmail(email)
     const { userid } = user
@@ -115,7 +114,7 @@ class User {
     const user = await User.fetchUserByEmail(email);
     const { userid } = user
 
-    //querying through the workout table WHERE userID matches userID from table
+    //querying through the nutritions table WHERE userID matches userID from table
     const result = await db.query(
       `SELECT * FROM nutritions WHERE userid=$1`, [userid]
     )
